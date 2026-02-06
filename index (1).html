@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ghfran Sabry — Portfolio</title>
+  <meta name="description" content="Ghfran Sabry is a Web & Mobile App Developer building responsive websites and cross-platform mobile applications using modern technologies." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0c101b;
+      --bg-2:#0f1422;
+      --text:#e9eef6;
+      --muted:#a2afc5;
+      --accent:#8dd6ff;          
+      --accent-2:#a770ff;       
+      --card:rgba(255,255,255,.035);
+      --stroke:rgba(255,255,255,.08);
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:18px;
+      --ease:cubic-bezier(.2,.9,.3,1);
+    }
+    [data-theme="light"]{
+      --bg:#f7f9fc; --bg-2:#ffffff; --text:#0c1324; --muted:#5d6b85;
+      --card:rgba(0,0,0,.04); --stroke:rgba(0,0,0,.08);
+      --shadow:0 10px 40px rgba(4,14,34,.12);
+      --accent:#5ab0ff; --accent-2:#6c5cff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text); background:var(--bg); line-height:1.55; -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:1120px;margin:0 auto;padding:28px}
+    .nav{
+      position:sticky; top:14px; z-index:100; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(180deg,rgba(255,255,255,.06),transparent);
+      border:1px solid var(--stroke); border-radius:14px; box-shadow:var(--shadow);
+      display:flex; align-items:center; justify-content:space-between; padding:10px 14px;
+    }
+    .brand{font-weight:800; letter-spacing:.2px}
+    .links{display:flex; gap:10px; flex-wrap:wrap}
+    .links a{padding:8px 12px; border-radius:10px; color:var(--muted); font-weight:600; transition:all .18s var(--ease)}
+    .links a:hover{color:var(--text); background:var(--card); transform:translateY(-3px)}
+    .toggle{
+      border:1px solid var(--stroke); background:var(--bg-2); color:var(--text); border-radius:10px;
+      padding:8px 10px; cursor:pointer; font-weight:700;
+    }
+    .hero{
+      position:relative; isolation:isolate; padding:80px 0 46px; overflow:hidden;
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center;
+    }
+    @media(max-width:980px){ .hero{grid-template-columns:1fr} }
+    .bg-anim{
+      content:""; position:absolute; inset:-25%;
+      background:
+        radial-gradient(800px 600px at 20% 20%, rgba(141,214,255,.15), transparent 60%),
+        radial-gradient(700px 500px at 90% 80%, rgba(167,112,255,.16), transparent 60%),
+        conic-gradient(from 0deg at 50% 50%, rgba(141,214,255,.07), rgba(167,112,255,.07), transparent 40%, transparent 100%);
+      filter:saturate(140%) blur(20px); z-index:-1; animation:float 22s linear infinite alternate;
+    }
+    @keyframes float{to{transform:translate3d(2%, -1.5%, 0) scale(1.02)}}
+
+    .title{font-size:clamp(28px,5vw,48px); margin:0 0 10px; line-height:1.05}
+    .lead{color:var(--muted); margin:10px 0 18px; font-size:1.07rem}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{
+      border:0; padding:12px 16px; border-radius:12px; font-weight:800; letter-spacing:.2px;
+      position:relative; overflow:hidden; cursor:pointer; transition:transform .15s var(--ease), box-shadow .2s var(--ease);
+    }
+    .btn-primary{
+      color:#0b1020; background:
+        linear-gradient(90deg,var(--accent), var(--accent-2));
+      box-shadow:0 16px 36px rgba(108,92,255,.25);
+    }
+    .btn-primary:hover{transform:translateY(-6px); box-shadow:0 26px 56px rgba(108,92,255,.28)}
+    .btn-ghost{background:var(--bg-2); color:var(--text); border:1px solid var(--stroke)}
+    .magnet{transform:translateZ(0)}
+
+    .card{
+      background:linear-gradient(180deg, var(--card), transparent);
+      border:1px solid var(--stroke); border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .profile{
+      padding:18px; display:flex; flex-direction:column; align-items:center; gap:10px;
+    }
+    .avatar{width:120px; height:120px; border-radius:50%; overflow:hidden; border:3px solid var(--stroke)}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:var(--card); border:1px solid var(--stroke); color:var(--muted); font-weight:700}
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+    .reveal.show{opacity:1; transform:none}
+    section{padding:56px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:16px}
+    .section-head h2{margin:0}
+    h2{font-size:clamp(20px,3.2vw,30px)}
+    .skills{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{
+      padding:10px 12px; border-radius:12px; border:1px solid var(--stroke); background:var(--bg-2);
+      font-weight:700; color:var(--text);
+    }
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media(max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:640px){ .grid{grid-template-columns:1fr} }
+    .project{
+      position:relative; padding:12px; transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+      transform-style:preserve-3d; perspective:900px;
+    }
+    .project:hover{transform:translateY(-8px)}
+    .thumb{height:160px; border-radius:12px; overflow:hidden; margin-bottom:10px}
+    .thumb img{width:100%; height:100%; object-fit:cover; transform:scale(1.02); transition:transform .35s var(--ease)}
+    .project:hover .thumb img{transform:scale(1.06)}
+    .meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .tag{font-size:.8rem; padding:6px 8px; border-radius:999px; background:var(--card); border:1px solid var(--stroke); color:var(--muted)}
+    .shine{pointer-events:none; position:absolute; inset:0; background:radial-gradient(400px 200px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.15), transparent 40%); opacity:0; transition:opacity .2s var(--ease)}
+    .project:hover .shine{opacity:1}
+    .timeline{position:relative; padding-left:22px}
+    .timeline::before{
+      content:""; position:absolute; left:6px; top:0; width:2px; height:0; background:linear-gradient(var(--accent), var(--accent-2));
+      border-radius:2px; transition:height 1.2s var(--ease);
+    }
+    .timeline.revealed::before{height:100%}
+    .t-item{display:grid; grid-template-columns:18px 1fr; gap:10px; margin-bottom:14px}
+    .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent-2)); margin-top:6px}
+    .t-card{padding:12px;border-radius:12px;border:1px solid var(--stroke); background:var(--bg-2)}
+    .contact{max-width:780px}
+    .form{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .form textarea{grid-column:1 / -1; resize:vertical}
+    input,textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--stroke);
+      background:var(--bg-2); color:var(--text); outline:none;
+      transition:border-color .15s var(--ease), box-shadow .15s var(--ease)
+    }
+    input:focus,textarea:focus{border-color:var(--accent); box-shadow:0 0 0 4px rgba(141,214,255,.15)}
+    .helper{color:var(--muted); font-size:.95rem}
+    footer{padding:22px 0; color:var(--muted); text-align:center}
+    @media(max-width:560px){
+      .links{display:none}
+      .form{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container nav">
+    <div class="brand">Ghfran Sabry</div>
+    <div class="links" role="navigation" aria-label="primary">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Certificates</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="toggle" id="themeBtn" aria-label="Toggle theme">☾</button>
+  </div>
+
+  <header class="container hero">
+    <div class="bg-anim" aria-hidden="true"></div>
+
+    <div class="reveal">
+      <span class="badge">New Cairo, Egypt</span>
+      <h1 class="title" id="tw"></h1>
+      <p class="lead">I build clean, responsive web apps focused on usability and performance. Comfortable with HTML, CSS, JavaScript, PHP, and MySQL. Exploring Flutter/Dart.</p>
+      <div class="cta">
+        <a class="btn btn-primary magnet" href="#projects">View Projects</a>
+        <a class="btn btn-ghost magnet" href="Ghfran Cv Information .pdf" download>Download CV</a>
+        <a class="btn btn-ghost magnet" href="https://github.com/ghfran1" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn btn-ghost magnet" href="https://www.linkedin.com/in/ghfran-sabry-924924385/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+
+    <aside class="card profile reveal" aria-label="profile">
+      <div class="avatar"><img src="saf.png" alt=" Ghfran Sabry"></div>
+      <div style="text-align:center">
+        <div style="font-weight:800; font-size:1.05rem">Web & Mobile App Developer</div>
+        <div class="helper">Class of 2027 — NCU of Technology</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center">
+        <span class="badge">HTML</span>
+        <span class="badge">CSS</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">PHP</span>
+        <span class="badge">MySQL</span>
+        <span class="badge">Bootstrap</span>
+        <span class="badge">Flutter (Exploring)</span>
+         <span class="badge">C++</span>
+        <span class="badge">Java</span>
+         <span class="badge">C</span>
+         <span class="badge">dart</span>
+       
+      </div>
+    </aside>
+  </header>
+  <section id="skills" class="container">
+    <div class="section-head">
+      <h2>Skills</h2>
+    </div>
+    <div class="skills reveal" aria-live="polite">
+      <span class="chip">HTML</span>
+      <span class="chip">CSS</span>
+      <span class="chip">JavaScript</span>
+      <span class="chip">Bootstrap</span>
+      <span class="chip">PHP</span>
+      <span class="chip">MySQL</span>
+      <span class="chip">Flutter</span>
+      <span class="chip">Git</span>
+      <span class="chip">Responsive Design</span>
+      <span class="chip">Accessibility</span>
+      <span class="chip">Problem Solving</span>
+      <span class="chip">Teamwork</span>
+      <span class="chip">Soft skills</span>
+    </div>
+  </section>
+
+  <section id="projects" class="container">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <a class="btn btn-ghost magnet" href="https://github.com/fatmahadad" target="_blank" rel="noreferrer">More on GitHub</a>
+    </div>
+
+    <div class="grid">
+      <article class="card project reveal" tabindex="0">
+        <div class="shine"></div>
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1200&auto=format&fit=crop" alt="University portal cover"></div>
+        <h3 style="margin:.2rem 0 .35rem">University Portal</h3>
+        <p class="helper" style="margin:.1rem 0 .7rem">Doctor login, student management, and assignment uploads.</p>
+        <div class="meta">
+          <a class="btn btn-ghost" href="https://fatmahadad.github.io/ncut/" target="_blank" rel="noreferrer">Live Demo</a>
+          <span class="tag">HTML • CSS • JS • PHP • MySQL</span>
+        </div>
+      </article>
+
+      <article class="card project reveal" tabindex="0">
+        <div class="shine"></div>
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="Shoe store cover"></div>
+        <h3 style="margin:.2rem 0 .35rem">Shoe Store</h3>
+        <p class="helper" style="margin:.1rem 0 .7rem">E-commerce UI with product management and cart flow.</p>
+        <div class="meta">
+          <a class="btn btn-ghost" href="https://fatmahadad.github.io/MyWebsite/" target="_blank" rel="noreferrer">Live Demo</a>
+          <span class="tag">HTML • CSS • JS</span>
+        </div>
+      </article>
+
+      <article class="card project reveal" tabindex="0">
+        <div class="shine"></div>
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" alt="Clothing store cover"></div>
+        <h3 style="margin:.2rem 0 .35rem">Clothing Store</h3>
+        <p class="helper" style="margin:.1rem 0 .7rem">Responsive storefront with categories and listings.</p>
+        <div class="meta">
+          <a class="btn btn-ghost" href="https://fatmahadad.github.io/MySecondWebsite/" target="_blank" rel="noreferrer">Live Demo</a>
+          <span class="tag">HTML • CSS • JS</span>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section id="certs" class="container">
+    <div class="section-head"><h2>Certificates</h2></div>
+    <div class="reveal" style="display:flex; gap:10px; flex-wrap:wrap">
+      <div class="card" style="padding:12px 14px">Flutter Development — Udemy</div>
+      <div class="card" style="padding:12px 14px">Frontend Web Development — Udemy</div>
+      <div class="card" style="padding:12px 14px">Web Development & Flutter — ITI</div>
+      <div class="card" style="padding:12px 14px">Frontend & Flutter — Sprint & Microsoft</div>
+    </div>
+  </section>
+  <section id="timeline" class="container">
+    <div class="section-head"><h2>Timeline</h2></div>
+    <div class="timeline reveal" id="tl">
+      <div class="t-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="t-card">
+          <div style="font-weight:800">Freelance / Academic Web Developer</div>
+          <div class="helper">2023 — Present</div>
+          <p class="helper" style="margin:.35rem 0 0">Built full-stack projects: university portal, e-commerce stores, and interactive web apps.</p>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="t-card">
+          <div style="font-weight:800">New Cairo University of Technology — IT</div>
+          <div class="helper">Class of 2027</div>
+          <p class="helper" style="margin:.35rem 0 0">2nd-year student focusing on web technologies and problem solving.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="container contact">
+    <div class="section-head"><h2>Contact</h2></div>
+    <form class="form card reveal" style="padding:14px" onsubmit="event.preventDefault(); alert('Thanks! This is a demo — wire it to Formspree/EmailJS to go live.');">
+      <input required type="text" name="name" placeholder="Your name" aria-label="Name" />
+      <input required type="email" name="email" placeholder="Email address" aria-label="Email" />
+      <textarea required rows="6" name="message" placeholder="Your message" aria-label="Message"></textarea>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+        <button class="btn btn-primary" type="submit">Send Message</button>
+        <a class="btn btn-ghost" href="ghfransabry911@gmail.com">Email</a>
+        <a class="btn btn-ghost" href="https://github.com/ghfran1" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ghfran-sabry-924924385/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </form>
+  </section>
+  <script>
+    (function typewriter(){
+      const el = document.getElementById('tw');
+      const txt = "Full Stack & Flutter Developer — Ghfran Sabry";
+      let i = 0;
+      function step(){
+        el.textContent = txt.slice(0, i++);
+        if(i <= txt.length) setTimeout(step, 36);
+      }
+      step();
+    })();
+    const R = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); R.unobserve(e.target); }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=>R.observe(el));
+    const tl = document.getElementById('tl');
+    const TLobs = new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ tl.classList.add('revealed'); TLobs.unobserve(tl); }});
+    }, {threshold:.4});
+    TLobs.observe(tl);
+    const btn = document.getElementById('themeBtn');
+    const KEY='fatma-theme';
+    const saved = localStorage.getItem(KEY);
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+    const updateIcon = ()=>{
+      btn.textContent = document.documentElement.getAttribute('data-theme')==='light' ? '☾' : '☀︎';
+    };
+    updateIcon();
+    btn.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur==='light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem(KEY, next);
+      updateIcon();
+    });
+    const magnets = document.querySelectorAll('.magnet');
+    magnets.forEach(m=>{
+      m.addEventListener('mousemove', e=>{
+        const r = m.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        m.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`;
+      });
+      m.addEventListener('mouseleave', ()=> m.style.transform = 'translate(0,0)');
+    });
+    const cards = document.querySelectorAll('.project');
+    const setShine = (el, e)=>{
+      const r = el.getBoundingClientRect();
+      const mx = ((e.clientX - r.left) / r.width) * 100;
+      const my = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty('--mx', mx + '%');
+      el.style.setProperty('--my', my + '%');
+    };
+    cards.forEach(card=>{
+      card.addEventListener('mousemove', e=>{
+        setShine(card, e);
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width/2)/r.width;
+        const y = (e.clientY - r.top - r.height/2)/r.height;
+        card.style.transform = `rotateX(${(-y*6)}deg) rotateY(${x*8}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = '');
+      card.addEventListener('focus', ()=> card.classList.add('focus'));
+      card.addEventListener('blur', ()=> card.classList.remove('focus'));
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const tgt = document.getElementById(id);
+        if(tgt){ e.preventDefault(); tgt.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
