@@ -1,0 +1,53 @@
+{
+  "en": {
+    "home": "Home",
+    "about": "About",
+    "education": "Education",
+    "skills": "Skills",
+    "experience": "Experience",
+    "services": "Services",
+    "projects": "Projects",
+    "testimonials": "Testimonials",
+    "plans": "Plans",
+    "contact": "Contact",
+
+    "hero_subtitle": "Welcome to my world",
+    "hero_role": "Software Engineer",
+    "portfolio_btn": "My Portfolio",
+    "download_cv": "Download CV",
+
+    "about_title": "About Me",
+    "skills_title": "Technical Skills",
+    "services_title": "Services",
+    "projects_title": "Featured Projects",
+    "testimonials_title": "Testimonials",
+    "plans_title": "Pricing Plans",
+    "contact_title": "Get In Touch"
+  },
+
+  "ar": {
+    "home": "الرئيسية",
+    "about": "من أنا",
+    "education": "التعليم",
+    "skills": "المهارات",
+    "experience": "الخبرات",
+    "services": "الخدمات",
+    "projects": "المشاريع",
+    "testimonials": "آراء العملاء",
+    "plans": "الخطط",
+    "contact": "تواصل",
+
+    "hero_subtitle": "مرحباً بك في عالمي",
+    "hero_role": "مهندسة برمجيات",
+    "portfolio_btn": "أعمالي",
+    "download_cv": "تحميل السيرة الذاتية",
+
+    "about_title": "من أنا",
+    "skills_title": "المهارات التقنية",
+    "services_title": "الخدمات",
+    "projects_title": "أهم المشاريع",
+    "testimonials_title": "آراء العملاء",
+    "plans_title": "خطط الأسعار",
+    "contact_title": "تواصل معي"
+  }
+}
